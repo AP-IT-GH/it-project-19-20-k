@@ -1,69 +1,69 @@
 #stationMap {
-    width: 80%;
-    height: 650px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
+  width: 80%;
+  height: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
 /*IMG*/
 #logoA{
-  width: 96px;
-  height: 96px;
-  position: absolute;
-  top: 60px;
+width: 96px;
+height: 96px;
+position: absolute;
+top: 60px;
 }
 
 /* HEADER */
 
-  header div{
-    position: relative;
-    width: 180px;
-    height: 45px;
-    background-color: white;
-    margin-bottom: 5px;
-    left: 1100px;
-  }
-  header button img{
-    margin-right: 15px;
+header div{
+  position: relative;
+  width: 180px;
+  height: 45px;
+  background-color: white;
+  margin-bottom: 5px;
+  left: 1100px;
+}
+header button img{
+  margin-right: 15px;
 
-  }
-  header button h3 {
-    display: inline-block;
-  }
+}
+header button h3 {
+  display: inline-block;
+}
 header {
 background-color: white;
-  height: 415px;
-  border-bottom: 1px solid gray;
-  margin-bottom: 20px;
+height: 415px;
+border-bottom: 1px solid gray;
+margin-bottom: 20px;
 }
 header nav{
-  display: inline-block;
-  height: 348px;
-  
+display: inline-block;
+height: 348px;
+
 }
 header nav ul {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
-  padding: 0px;
-  height: 40px;
+position: relative;
+display: inline-block;
+margin: 0px;
+padding: 0px;
+height: 40px;
 
 }
 
 header nav ul li{
-  text-align: center;
-  position: relative;
-  bottom: 60px;
-  left: 300px;
-  margin: 0px 100px 0px 0px;
-  display: inline-block;
-  height: 110px;
+text-align: center;
+position: relative;
+bottom: 60px;
+left: 300px;
+margin: 0px 100px 0px 0px;
+display: inline-block;
+height: 110px;
 }
 header nav ul li a {
-  text-decoration: none;
-  text-transform: uppercase;
-  margin: 120px;
-  
+text-decoration: none;
+text-transform: uppercase;
+margin: 120px;
+
 }
 header nav ul li a img{
 background-color: white;
@@ -72,23 +72,47 @@ top: 150px;
 border-radius: 20px;
 }
 header nav ul li a h3{
-  background-color: white;
-  text-align: center;
-  color: black;
-  position: relative;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  left : 60px;  
-  
-  }
+background-color: white;
+text-align: center;
+color: black;
+position: relative;
+margin-top: 0px;
+margin-bottom: 0px;
+left : 60px;  
+
+}
 
 /*header finish!*/
 main{
-  background-color: teal;
+background-color: teal;
 }
 
-footer p {  
-  text-align: center;
+/*Contact en Copyright*/
+h3{
+font-weight: bold;
+font-family: Arial, Helvetica, sans-serif;
+line-height: 1.25;
+color: rgb(77, 77, 77);
 }
 
+p{
+font-size: 9pt;
+font-family: Arial, Helvetica, sans-serif;
+line-height: 1.25;
+color: rgb(77, 77, 77);
+}
 
+/*css voor email handtekening*/
+.handtekening {
+font-size: 9pt;
+font-family: Arial, Helvetica, sans-serif;
+line-height: 1.25;
+color: rgb(77, 77, 77);
+}
+.handtekening a:hover {
+color: black;
+}
+
+.copy{  
+text-align: center;
+}
