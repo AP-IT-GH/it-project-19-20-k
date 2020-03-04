@@ -8,14 +8,15 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
      <!-- mapscript codes -->
-
+     <link rel="stylesheet" href="https://cdn.antwerpen.be/core_branding_scss/4.1.1/main.min.css"> <!-- css antwerpen huisstijl-->
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
      crossorigin=""/>
      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" defer></script>
 
      <!-- Verbindingen met documenten-->
-    <script src="javascript/javascript.js" defer></script>
+    <script src="Javascript/leaflet.js" defer></script>
+    <script src="Javascript/index.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
      
 
@@ -24,9 +25,35 @@
  <body>
 
      <header>
-        <div id="topAanmelden">
-           <a href="www.eben.com"> <button style="width: 180px; height: 42px "> <img src="./Images/persoon.png" alt="Aanmelden verwijzing"><h3> Aanmelden</h3></button></a>
-        </div>
+        
+            <button class="a-button-official" onclick="document.getElementById('topAanmelden').style.display='block'">
+                Log in with A-profile
+              </button>
+       
+
+        <div id="topAanmelden" class="loginForm">
+
+            <form class="loginFormActief" method="GET">
+          
+              <span onclick="document.getElementById('topAanmelden').style.display='none'" class="close" title="Afsluiten">&times;</span>
+          
+              <div class="containerInloggen">
+          
+                <label for="username"><b>Gebruikersnaam</b></label>
+                <input type="text" placeholder="Gebruikersnaam invoeren" name="userName" required>
+          
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Password invoeren" name="password" required>
+                
+                <button type="submit" class="loginButton">Login</button>
+          
+              </div>
+          
+            </form>
+          </div>
+
+
+
         <img src="images/logo.svg" alt="Stad antwerpen logo" id="logoA"> 
          <nav>
             
@@ -42,9 +69,9 @@
 
      <main>
 
-         <h1>Groene stad antwerpen</h1>
+         <h1 id="welkomBericht">Groene stad antwerpen</h1>
          
-         <div id="stationMap">
+         <div id="stationMap" style="z-index: 0;">
 
          </div>
          <br>

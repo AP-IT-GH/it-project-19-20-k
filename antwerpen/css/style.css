@@ -4,13 +4,12 @@
     margin-left: auto;
     margin-right: auto;
   }
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css");
 /*IMG*/
 #logoA{
   width: 72px;
   height: 72px;
   position: absolute;
-  top: 55px;
+  top: 58px;
 }
 *{
   margin: 0px;
@@ -19,7 +18,80 @@
 
 /* HEADER */
 
-  header div{
+
+/*login form */
+
+
+  
+  /* Opmaak van Input typen text en password */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* instellingen voor login button */
+  .loginButton {
+    background-color: #0064B4;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .loginButton:hover {
+    opacity: 0.8;
+  }
+  
+  .containerInloggen {
+    padding: 15px;
+  }
+  
+  /* Login form  (achtergrond) */
+  .loginForm {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 10px;
+  }
+  
+  /* Actieve login form*/
+  .loginFormActief {
+    background-color: white;
+    margin: 5% auto 15% auto; 
+    border: 1px solid black;
+    width: 50%; 
+  }
+  
+  /* Afsluiten van login form (x) */
+  .close {
+    margin-right: 15px;
+    float: right;
+    color:red;
+    font-size: 45px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(117, 0, 0);
+    cursor: pointer;
+  }
+  
+/*login form */
+
+  #topAanmeldenButton{
     position: relative;
     width: 180px;
     height: 45px;
@@ -28,12 +100,17 @@
     float: right;
     margin-right: 0px;
   }
-  header button{
+  #buttonLogin{
     height: 50px;
     margin-top: 3px;
     margin-bottom: 3px;
     text-transform: uppercase;
+    cursor: pointer;
 
+  }
+  #buttonLogin:hover{
+    background-color: rgb(150, 150, 150);
+    opacity: 0.8;
   }
   header button img{
     margin-right: 15px;
@@ -43,9 +120,15 @@
   header button h3 {
     display: inline-block;
     position: relative;
+    font-size: 15px;
     bottom: 3px;
   }
 
+.a-button-official{
+float: right;
+margin-bottom: 5px;
+margin-top: 5px;
+}
 header {
 background-color: white;
   height: 415px;
@@ -77,8 +160,6 @@ header nav ul li{
   bottom: 60px;
   margin-left: 280px;
 
-
-
 }
 header nav ul li a {
   text-decoration: none;
@@ -89,18 +170,22 @@ header nav ul li a {
 }
 header nav ul li a img{
 background-color:white ;
-padding: 6px;
+padding: 5px;
 border-radius: 20px;
 box-shadow: 0px 0px 10px 0px green;
 text-align: center;
+width: 60px;
+height: 60px;
+margin-top: 15px;
 }
 
 header nav ul li a h3{
   background-color: white;
   text-align: center;
   color: black;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 0px;
+  font-size: 20px;
   
   }
   
@@ -108,9 +193,25 @@ header nav ul li a h3{
 /*header finish!*/
 
 main{
-  background-color: teal;
+  background-color:white;
 }
 
 footer p {  
   text-align: center;
+}
+/* Add Zoom Animation */
+
+.loginFormActief {
+  -webkit-animation: animatezoom 0.8s;
+  animation: animatezoom 0.8s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
 }
