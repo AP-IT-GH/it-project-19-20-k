@@ -13,7 +13,6 @@
      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
      crossorigin=""/>
      <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" defer></script>
-
      <!-- Verbindingen met documenten-->
     <script src="Javascript/leaflet.js" defer></script>
     <script src="Javascript/index.js" defer></script>
@@ -33,7 +32,7 @@
 
         <div id="topAanmelden" class="loginForm">
 
-            <form class="loginFormActief" method="GET">
+0            <form id="loginFormActief">
           
               <span onclick="document.getElementById('topAanmelden').style.display='none'" class="close" title="Afsluiten">&times;</span>
           
@@ -45,31 +44,66 @@
                 <label for="password"><b>Password</b></label>
                 <input type="password" placeholder="Password invoeren" name="password" required>
                 
-                <button type="submit" class="loginButton">Login</button>
+                <button type="submit" id="loginButton">Login</button>
           
               </div>
           
             </form>
           </div>
 
+          <img src="images/logo.svg" alt="Stad antwerpen logo" id="logoA"> 
 
-
-        <img src="images/logo.svg" alt="Stad antwerpen logo" id="logoA"> 
          <nav>
-            
-             <img src="./Images/antwerpentest.png" alt="" style="width: 100%; height: 300px; z-index: -1; margin-top: 0px;">
-             <ul>
+             <img src="./Images/antwerpentest.png" alt="" id="achtergrondPsn">
+             <img src="./Images/antwerpenMobile.png" alt="" id="achtergrondPsnMobile">
+             
+             <ul id="navDesktop">
                  <li><a href="www.eben.com"> <img src="./Images/home.png" alt=""><h3>HOME</h3></a></li>
                  <li> <a href="www.eben.com"><img src="./Images/locatie.png" alt=""><h3>PLAATSEN</h3></a></li>
                  <li><a href="www.eben.com"><img src="./Images/contact.png" alt=""><h3>CONTACT</h3></a> </li>
              </ul>
+             <div class="navMobile">
+                <a href="./index.HTML"><h3>HOME</h3></a>
+              </div>
+              <div class="navMobile">
+                <a href="./index.HTML#mainMenu"><h3>PLAATSEN</h3></a>
+            </div>
+            <div class="navMobile">
+                <a href="/index.HTML#contact"><h3>CONTACT</h3></a>
+            </div>
          </nav>
+        
      </header>
 
 
-     <main>
+     <main id="mainMenu">
 
          <h1 id="welkomBericht">Groene stad antwerpen</h1>
+        
+          <h2 id="plaatsenLijst">Plaatsen</h2>
+          <article id="buurtGroen">
+          <h2>Buurt-gebruiksgroen</h2>
+          <ol>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </article>
+        <article>
+          <h2>Stadsdeelgebruiksgroen</h2>
+          <ol>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+          </ul>
+        </article>
+        
          
          <div id="stationMap" style="z-index: 0;">
 
@@ -81,18 +115,14 @@
 
      </main>
      
-     <footer><p>Gemaakt door &copy;Group K | 2019 AP-Antwerpen.be | <a href="privacy.html">Privacy & gebruiksvoorwaarden</a></p>
+     <footer id="contact">
+    <p>Gemaakt door &copy;Group K | 2019 AP-Antwerpen.be | <a href="privacy.html">Privacy & gebruiksvoorwaarden</a></p>
 
-       
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
      </footer>
-
-
-     <div>
-         <br>
-         <br>
-         <br>
-
-         
-     </div>
- </body>
+    </body>
  </html>

@@ -1,6 +1,6 @@
 let myMap = L.map('stationMap', {
     center: [51.2301, 4.41774],
-    zoom: 16
+    zoom: 12
   });
   
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -10,5 +10,5 @@ let myMap = L.map('stationMap', {
   }).addTo(myMap);
   
   let marker = L.marker([51.2301, 4.41774]).addTo(myMap);
-
+  let marker1 = L.marker([51.2301, 4.42774]).addTo(myMap);
   
