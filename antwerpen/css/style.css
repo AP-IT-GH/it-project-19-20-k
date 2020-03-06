@@ -9,14 +9,14 @@
   position: absolute;
   top: 58px;
 }
-/*PARK SPOR NOORD ANTWERPEN IMG*/
+/*PARK SPOOR NOORD ANTWERPEN IMG*/
 #achtergrondPsn{
   width: 100%;
   height: 100%; 
   z-index: -1;
    margin-top: 0px;
 }
-/*PARK SPOR NOORD ANTWERPEN IMG MOBILE*/
+/*PARK SPOOR NOORD ANTWERPEN IMG MOBILE*/
 #achtergrondPsnMobile{
   display: none;
 }
