@@ -21,7 +21,7 @@ app.get('/', (req,res) => {
 
 app.get('/stadsdeel', (req,res) =>{
   //API stadsdeel-gebruiksgroen
-fetch('https://geodata.antwerpen.be/arcgissql/rest/services/P_Portal/portal_publiek8/MapServer/854/query?where=1%3D1&outFields=*&outSR=4326&f=json')
+fetch('https://opendata.arcgis.com/datasets/593e9680b43e4332952d3ef249e1912a_854.geojson')
 .then(res => res.json())
 .then(stadsdeelData => {
     res.json(stadsdeelData);
