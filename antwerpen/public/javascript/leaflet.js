@@ -19,18 +19,15 @@ fetch('/stadsdeel')
 .then((data) => {
   //Nakijken of dat alle objecten worden getoond in console.
   console.log(data.features);
-  //arrays aanmaken om sneller properties op te roepen.
-  let arrayStadsdeel = [];
-  for(let i = 0;i < data.features.length; i++){
-    arrayStadsdeel[i] =  data.features[i].properties;
-  }
 
   L.geoJSON(data, {
-    onEachFeature: (feature, layer) => {
-      let naam = feature.properties.NAAM;
-      let postcode = feature.properties.POSTCODE;
-      let district = feature.properties.DISTRICT;
-      layer.bindPopup(`${naam}, ${postcode}, ${district}`);
+    onEachFeature: (features, layer) => {
+      let naam = features.properties.NAAM;
+      let postcode = features.properties.POSTCODE;
+      let district = features.properties.DISTRICT;
+      let omschrijving = features.properties.OMSCHRIJVING;
+      layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+      <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(myMap);
 

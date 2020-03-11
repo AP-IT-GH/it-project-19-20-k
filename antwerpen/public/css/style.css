@@ -388,6 +388,11 @@ footer{
   animation: animatezoom 0.8s
 }
 
+/*Tekst centreren in popup*/
+.popup{
+  text-align: center;
+}
+
 @-webkit-keyframes animatezoom {
   from {-webkit-transform: scale(0)} 
   to {-webkit-transform: scale(1)}
