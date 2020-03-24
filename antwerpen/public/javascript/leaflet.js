@@ -34,6 +34,11 @@ let myStyleStadsdeel = {
   color: 'green'
 };
 
+let myStyleBuurt ={
+  fillColor: 'darkpurple',
+  color: 'purple'
+}
+
 // Layers
 let stadsdeel = L.layerGroup();
 let buurt = L.layerGroup();
@@ -58,12 +63,24 @@ fetch('/stadsdeel')
 })
 
 //API buurt-gebruiksgroen 
-/*fetch('/buurt')
+fetch('/buurt')
 .then((response) => {
   return response.json();
 })
 .then(data => {
-});*/
+  console.log(data.features);
+  L.geoJSON(data, {
+  onEachFeature: (features, layer) => {
+      let naam = features.properties.NAAM;
+      let postcode = features.properties.POSTCODE;
+      let district = features.properties.DISTRICT;
+      let omschrijving = features.properties.OMSCHRIJVING;
+      layer.setStyle(myStyleBuurt);
+      layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+      <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
+    }
+  }).addTo(buurt);
+})
 
 
 L.marker([51.2211, -4.4021]).bindPopup('This is Littleton, CO.').addTo(buurt);
