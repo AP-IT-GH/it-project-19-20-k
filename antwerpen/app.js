@@ -28,6 +28,15 @@ fetch('https://opendata.arcgis.com/datasets/593e9680b43e4332952d3ef249e1912a_854
 });
 });
 
+app.get('/buurt', (req,res) =>{
+  //API buurt-gebruiksgroen
+fetch('https://opendata.arcgis.com/datasets/c96c56b2c36f48cc86fbe77ea872b555_850.geojson')
+.then(res => res.json())
+.then(buurtData => {
+    res.json(buurtData);
+});
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Express started on http://localhost:${
     app.get('port')}; press Ctrl-C to terminate.`);
