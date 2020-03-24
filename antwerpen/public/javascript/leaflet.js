@@ -65,7 +65,6 @@ fetch('/stadsdeel')
 .then(data => {
 });*/
 
-let buurt = L.layerGroup();
 
 L.marker([51.2211, -4.4021]).bindPopup('This is Littleton, CO.').addTo(buurt);
 
