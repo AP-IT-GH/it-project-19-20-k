@@ -110,17 +110,3 @@ let overlays = {
 };
 
 L.control.layers(baseLayers, overlays).addTo(myMap);
-
-//route aanmaken
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors'
-}).addTo(myMap);
-
-L.Routing.control({
-    waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949)
-    ],
-    routeWhileDragging: true
-}).addTo(myMap);
