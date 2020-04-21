@@ -63,6 +63,7 @@ fetch('/stadsdeel')
 })
 
 //API buurt-gebruiksgroen 
+let array = [];
 fetch('/buurt')
 .then((response) => {
   return response.json();
@@ -75,17 +76,13 @@ fetch('/buurt')
       let postcode = features.properties.POSTCODE;
       let district = features.properties.DISTRICT;
       let omschrijving = features.properties.OMSCHRIJVING;
-      let naam = features.properties.NAAM;
-      let postcode = features.properties.POSTCODE;
-      let district = features.properties.DISTRICT;
-      let omschrijving = features.properties.OMSCHRIJVING;
       const list = document.getElementById("lijst");
         for (let i = 0; i < data.features.length; i++) {
           array[i] = data.features[i];
           let infoNaam = document.createElement("li");
           let infoDistrictPostcode = document.createElement("li");
           let listOmschrijving = document.createElement("li");
-          infoNaam.textContent = "Nam: " +  data.features[i].properties.NAAM;
+          infoNaam.textContent = "Naam: " +  data.features[i].properties.NAAM;
           infoDistrictPostcode = "Gemeente: " + `${data.features[i].properties.DISTRICT} ${data.features[i].properties.POSTCODE}`;
           listOmschrijving.textContent = "Omschrijving: " + data.features[i].properties.OMSCHRIJVING;
           list.append(infoNaam, infoDistrictPostcode, listOmschrijving);
@@ -128,13 +125,24 @@ L.control.layers(baseLayers, overlays).addTo(myMap);
 //
 //routing werkt nog niet
 
-let control = L.Routing.control({
-  waypoints: [
-      L.latLng(57.74, 11.94),
-      L.latLng(57.6792, 11.949)
-  ],
-  routeWhileDragging: true
-});
+let control = L.Routing.control(L.extend(window.lrmConfig, {
+	waypoints: [
+		L.latLng(57.74, 11.94),
+		L.latLng(57.6792, 11.949)
+	],
+	geocoder: L.Control.Geocoder.nominatim(),
+	routeWhileDragging: true,
+	reverseWaypoints: true,
+	showAlternatives: true,
+	altLineOptions: {
+		styles: [
+			{color: 'black', opacity: 0.15, weight: 9},
+			{color: 'white', opacity: 0.8, weight: 6},
+			{color: 'blue', opacity: 0.5, weight: 2}
+		]
+	}
+})).addTo(myMap);
 
 L.Routing.errorControl(control).addTo(myMap);
+
 
