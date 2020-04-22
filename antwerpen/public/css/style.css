@@ -215,23 +215,29 @@ footer p {
   'benito youssef';
   text-align: center;
   padding-top: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 #footerDivSide{
   width: 30%;
   padding: 20px 20px 20px 20px;
   border-left: 2px gray solid;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 .findUs{
   border-top: 1px gray solid;
-  padding-top:10px;
+  padding-top:25px;
 }
 .copy{
   background-color: black;
   text-align: center;
+  display: flex;
 }
 .copy p{
   color: white;
+margin: auto;
 }
 /*FOOTER EINDE*/
 
