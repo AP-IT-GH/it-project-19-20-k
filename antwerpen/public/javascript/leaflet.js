@@ -81,8 +81,8 @@ fetch('/buurt')
   }).addTo(buurt);
 })
 
-console.log(stadArray);
-console.log(buurtArray);
+//console.log(stadArray);
+//console.log(buurtArray);
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -112,50 +112,48 @@ L.control.layers(baseLayers, overlays).addTo(myMap);
 //
 
 //Locatie opvragen
+let latitude,longitude;
 myMap.locate({setView: true, maxZoom: 13});
-function onLocationFound(e) {
-let radius = e.accuracy;
-//L.marker(e.latlng).addTo(myMap)
-    //.bindPopup("Je bent " + radius + " meter in de buurt").openPopup();
-//L.circle(e.latlng, radius).addTo(myMap);
-}
+navigator.geolocation.getCurrentPosition(function(location){
+  latitude = location.coords.latitude;
+  longitude = location.coords.longitude;
 
-//routing
-let control = L.Routing.control({
-  waypoints: [
-    L.latLng(myMap.on('locationfound', onLocationFound)),
-  ],
-  routeWhileDragging: true,
-  collapsible: true,
-  router: L.Routing.mapbox('pk.eyJ1IjoiYWJkdXJyYWhtYW5kdW5kYXIiLCJhIjoiY2s5N3U3eHV0MDBveTNucWl1OTNtZDc3cyJ9.ZvvJHZHkuqIst2eBTRPzfA')
-}).addTo(myMap);
+  //routing
+  let control = L.Routing.control({
+    waypoints: [
+      L.latLng(latitude,longitude),
+    ],
+    routeWhileDragging: true,
+    collapsible: true,
+    router: L.Routing.mapbox('pk.eyJ1IjoiYWJkdXJyYWhtYW5kdW5kYXIiLCJhIjoiY2s5N3U3eHV0MDBveTNucWl1OTNtZDc3cyJ9.ZvvJHZHkuqIst2eBTRPzfA')
+  }).addTo(myMap);
 
-//Voor routing click route
-function createButton(label, container) {
-  let btn = L.DomUtil.create('button', '', container);
-  btn.setAttribute('type', 'button');
-  btn.innerHTML = label;
-  return btn;
-}
+  //Voor routing click route
+  function createButton(label, container) {
+    let btn = L.DomUtil.create('button', '', container);
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = label;
+    return btn;
+  }
 
-myMap.on('click', function(e) {
-  let container = L.DomUtil.create('div'),
-      startBtn = createButton('Start van deze locatie', container),
-      destBtn = createButton('Ga naar deze locatie', container);
+  myMap.on('click', function(e) {
+    let container = L.DomUtil.create('div'),
+        startBtn = createButton('Start van deze locatie', container),
+        destBtn = createButton('Ga naar deze locatie', container);
 
-  L.popup()
-      .setContent(container)
-      .setLatLng(e.latlng)
-      .openOn(myMap);
-      
-  L.DomEvent.on(startBtn, 'click', function() {
-    control.spliceWaypoints(0, 1, e.latlng);
-    myMap.closePopup();
-  });
-  
-  L.DomEvent.on(destBtn, 'click', function() {
-    control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
-    myMap.closePopup();
+    L.popup()
+        .setContent(container)
+        .setLatLng(e.latlng)
+        .openOn(myMap);
+        
+    L.DomEvent.on(startBtn, 'click', function() {
+      control.spliceWaypoints(0, 1, e.latlng);
+      myMap.closePopup();
+    });
+    
+    L.DomEvent.on(destBtn, 'click', function() {
+      control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
+      myMap.closePopup();
+    });
   });
 });
-
