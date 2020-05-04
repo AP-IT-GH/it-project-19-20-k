@@ -186,6 +186,10 @@ main article{
   margin-right: auto;
 }
 
+#lijstAPI{
+  display: none;
+}
+
 /*main stop*/
 
 /*FOOTER BEGIN*/
