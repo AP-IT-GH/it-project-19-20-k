@@ -2,6 +2,9 @@
   margin: 0px;
   padding: 0px;
 }
+h5{
+  text-align: center;
+}
 /*LOGO ANTWERPEN IMG*/
 #logoA{
   width: 72px;
@@ -188,6 +191,22 @@ main article{
 
 #lijstAPI{
   display: none;
+  width: 100%;
+}
+#lijstStadsdeel , #lijstBuurt{
+  width: 100%;
+  display: inline-block;
+  
+}
+#lijstStadsdeel li , #lijstBuurt li{
+float: left;
+text-align: left;
+position: relative;
+width: 31%;
+list-style-image: url(../Images/botanical.png);
+margin-left: 25px;
+border-bottom: 1px gray solid;
+
 }
 
 /*main stop*/
