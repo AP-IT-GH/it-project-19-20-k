@@ -48,6 +48,7 @@ fetch('/stadsdeel')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(stadsdeel);
+  console.log(stadArray);
 })
 
 //API buurt-gebruiksgroen 
@@ -63,22 +64,15 @@ fetch('/buurt')
       let postcode = features.properties.POSTCODE;
       let district = features.properties.DISTRICT;
       let omschrijving = features.properties.OMSCHRIJVING;
-      //const list = document.getElementById("lijst");
       for (let i = 0; i < data.features.length; i++) {
         buurtArray[i] = data.features[i];
-        /*let infoNaam = document.createElement("li");
-        let infoDistrictPostcode = document.createElement("li");
-        let listOmschrijving = document.createElement("li");
-        infoNaam.textContent = "Naam: " +  data.features[i].properties.NAAM;
-        infoDistrictPostcode = "Gemeente: " + `${data.features[i].properties.DISTRICT} ${data.features[i].properties.POSTCODE}`;
-        listOmschrijving.textContent = "Omschrijving: " + data.features[i].properties.OMSCHRIJVING;
-        list.append(infoNaam, infoDistrictPostcode, listOmschrijving);*/
       }
       layer.setStyle(myStyleBuurt);
       layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(buurt);
+  console.log(buurtArray);
 })
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
