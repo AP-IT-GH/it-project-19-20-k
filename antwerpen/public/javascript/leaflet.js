@@ -26,6 +26,15 @@ let myStyleBuurt ={
 // Layers
 let stadsdeel = L.layerGroup();
 let buurt = L.layerGroup();
+let antwerpen2000 = L.layerGroup();
+let antwerpen2060 = L.layerGroup();
+let berchem2600 = L.layerGroup();
+let deurne2100 = L.layerGroup();
+let merksem2170= L.layerGroup();
+let linkeroever2050 = L.layerGroup();
+let wilrijk2610 = L.layerGroup();
+let ekeren2180 = L.layerGroup();
+
 
 //API stadsdeel-gebruiksgroen
 let stadArray = [];
@@ -92,20 +101,25 @@ let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoom
 let map = L.map('map', {
     center: [39.73, -104.99],
     zoom: 10,
-    layers: [grayscale, stadsdeel,buurt]
+    layers: [grayscale, stadsdeel,buurt,antwerpen2000,antwerpen2060,berchem2600,deurne2100,merksem2170,linkeroever2050,ekeren2180,wilrijk2610]
 });
-
-let baseLayers = {
-    "Grayscale": grayscale,
-    "Streets": streets
-};
 
 let overlays = {
     "Buurt gebruiksgroen": buurt,
-    "Stadsdeel gebruiksgroen": stadsdeel
+    "Stadsdeel gebruiksgroen": stadsdeel,
+    "Antwerpen-2000":antwerpen2000,
+    "Antwerpen-2060":antwerpen2060,
+    "Berchem-2600":berchem2600,
+    "Deurne-2100":deurne2100,
+    "Merksem-2170":merksem2170,
+    "Linkeroever-2050":linkeroever2050,
+    "Ekeren-2180":ekeren2180,
+    "Wilrijk-2610":wilrijk2610
+
+    
 };
 
-L.control.layers(baseLayers, overlays).addTo(myMap);
+L.control.layers( overlays).addTo(myMap);
 //
 
 //Locatie opvragen
