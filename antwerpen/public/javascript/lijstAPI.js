@@ -8,6 +8,13 @@ let stadsdeelFetch = fetch('/stadsdeel')
         stadArr.push(stadFeatures[i].properties.NAAM);
     }
     stadArrDistinct = stadArr.filter((n, i) => stadArr.indexOf(n) === i);
+    stadArrDistinct.sort((a,b) => {
+        const name1 = a.toUpperCase();
+        const name2 = b.toUpperCase();
+        if(name1 < name2 ) return -1;
+        if(name1 > name2 ) return 1;
+        return 0;
+    });
     showList(stadArrDistinct, 'lijstStadsdeel');
 });
 
@@ -22,6 +29,13 @@ let buurtFetch = fetch('/buurt')
         buurtArr.push(buurtFeatures[i].properties.NAAM);
     }
     buurtArrDistinct = buurtArr.filter((n, i) => buurtArr.indexOf(n) === i);
+    buurtArrDistinct.sort((a,b) => {
+        const name1 = a.toUpperCase();
+        const name2 = b.toUpperCase();
+        if(name1 < name2 ) return -1;
+        if(name1 > name2 ) return 1;
+        return 0;
+    });
     showList(buurtArrDistinct, 'lijstBuurt');
 });
 
