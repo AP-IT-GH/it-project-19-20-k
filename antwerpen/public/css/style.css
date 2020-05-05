@@ -188,7 +188,7 @@ main article{
   margin-left: auto;
   margin-right: auto;
 }
-
+/* Li items bewerken van list */
 #lijstAPI{
   display: none;
   width: 100%;
@@ -208,6 +208,18 @@ margin-left: 25px;
 border-bottom: 1px gray solid;
 
 }
+/* Li items bewerken van list */
+/* checkbutton bewerken */
+.leaflet-control-layers-selector{
+  height: 12px;
+  width: 12px;
+  border: 1px black solid;
+  text-align: center;
+}
+.leaflet-control-layers-selector:checked{
+  background-color: green;
+}
+
 
 /*main stop*/
 
