@@ -1,5 +1,3 @@
-let fetchStadsdeel = 'https://opendata.arcgis.com/datasets/593e968ib43e4332952d3ef249e1912a_854.geojson';
-
 let myMap = L.map('stationMap', {
     center: [51.2301, 4.41774],
     zoom: 12
@@ -59,9 +57,6 @@ fetch('/stadsdeel')
     }
   }).addTo(stadsdeel);
 })
-
-
-
 
 //API buurt-gebruiksgroen 
 let buurtArray = [];
