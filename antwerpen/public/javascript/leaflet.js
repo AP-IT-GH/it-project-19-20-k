@@ -21,23 +21,37 @@ let myStyleBuurt ={
   color: 'purple'
 }
 
-// Layers
+// Layers 
 let stadsdeel = L.layerGroup();
 let buurt = L.layerGroup();
-let antwerpen2000 = L.layerGroup();
-let antwerpen2060 = L.layerGroup();
-let hoboken2660 = L.layerGroup();
-let berchem2600 = L.layerGroup();
-let deurne2100 = L.layerGroup();
-let merksem2170= L.layerGroup();
-let linkeroever2050 = L.layerGroup();
-let wilrijk2610 = L.layerGroup();
-let ekeren2180 = L.layerGroup();
+let antwerpen = L.layerGroup();
+let hoboken = L.layerGroup();
+let berchem = L.layerGroup();
+let deurne = L.layerGroup();
+let merksem = L.layerGroup();
+let linkeroever = L.layerGroup();
+let wilrijk = L.layerGroup();
+let ekeren = L.layerGroup();
+let wijnegem = L.layerGroup();
+let schoten = L.layerGroup();
+let beveren = L.layerGroup();
+let brasschaat = L.layerGroup();
+let borgerhout = L.layerGroup();
+let wommelgem = L.layerGroup();
+let mortsel = L.layerGroup();
+let kapellen = L.layerGroup();
+let edegem = L.layerGroup();
+let borsbeek = L.layerGroup();
+let zwijndrecht = L.layerGroup();
+let stabroek = L.layerGroup();
+let berendrecht = L.layerGroup();
+let hemiksem = L.layerGroup();
+let aartselaar = L.layerGroup();
 
 
 //API stadsdeel-gebruiksgroen
 let stadArray = [];
-fetch('/stadsdeel')
+let stadsdeelFetch = fetch('/stadsdeel')
 .then((response) => {
   return response.json();
 })
@@ -56,6 +70,14 @@ fetch('/stadsdeel')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(stadsdeel);
+  L.geoJSON(data, {
+    filter: (features, layer) => {
+      let district = features.properties.DISTRICT;
+      if(district === 'Wilrijk'){
+        return features.properties.DISTRICT;
+      }
+    }
+  }).addTo(antwerpen2000);
 })
 
 //API buurt-gebruiksgroen 
@@ -83,17 +105,6 @@ fetch('/buurt')
   }).addTo(buurt);
 })
 
-
-
-
-
-
-
-
-
-
-
-
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -105,25 +116,36 @@ let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoom
 let map = L.map('map', {
     center: [39.73, -104.99],
     zoom: 10,
-    layers: [grayscale, stadsdeel,buurt,antwerpen2000,antwerpen2060,berchem2600,hoboken2660,deurne2100,merksem2170,linkeroever2050,ekeren2180,wilrijk2610]
+    layers: [grayscale, stadsdeel,buurt, aartselaar, antwerpen, berchem, berendrecht, borgerhout, borsbeek, brasschaat, deurne, edegem, ekeren, hemiksem, hoboken, kapellen, merksem, mortsel, schoten, stabroek, wijnegem, wilrijk, wommelgem, zwijndrecht]
 });
 
 let overlays = {
-    "Buurt gebruiksgroen": buurt,
-    "Stadsdeel gebruiksgroen": stadsdeel,
-    "Antwerpen-2000":antwerpen2000,
-    "Antwerpen-2060":antwerpen2060,
-    "Berchem-2600":berchem2600,
-    "Hoboken-2660":hoboken2660,
-    "Deurne-2100":deurne2100,
-    "Merksem-2170":merksem2170,
-    "Linkeroever-2050":linkeroever2050,
-    "Ekeren-2180":ekeren2180,
-    "Wilrijk-2610":wilrijk2610
+    "Buurt-gebruiksgroen": buurt,
+    "Stadsdeel-gebruiksgroen": stadsdeel,
+    "Aartselaar": aartselaar,
+    "Antwerpen":antwerpen,
+    "Berchem":berchem,
+    "Berendrecht-Zandvliet-Lillo": berendrecht,
+    "Borgerhout": borgerhout,
+    "Borsbeek": borsbeek,
+    "Brasschaat": brasschaat,
+    "Deurne":deurne,
+    "Edegem": edegem,
+    "Ekeren":ekeren,
+    "Hemiksem": hemiksem,
+    "Hoboken":hoboken,
+    "Kapellen": kapellen,
+    "Merksem":merksem,
+    "Mortsel": mortsel,
+    "Schoten": schoten,
+    "Stabroek": stabroek,
+    "Wijnegem": wijnegem,
+    "Wilrijk":wilrijk,
+    "Wommelgem": wommelgem,
+    "Zwijndrecht": zwijndrecht
 };
 
 L.control.layers( overlays).addTo(myMap);
-//
 
 //Locatie opvragen
 let latitude,longitude;
