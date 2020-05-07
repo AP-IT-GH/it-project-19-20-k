@@ -209,6 +209,7 @@ border-bottom: 1px gray solid;
 
 }
 /* Li items bewerken van list */
+
 /* checkbutton bewerken */
 .leaflet-control-layers-selector{
   height: 12px;
@@ -219,7 +220,19 @@ border-bottom: 1px gray solid;
 .leaflet-control-layers-selector:checked{
   background-color: green;
 }
+/* checkbutton bewerken */
 
+/*switch bewerken van lijst*/
+.a-input{
+text-align: center;
+}
+.a-switch{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 20px;
+}
+/*switch bewerken van lijst*/
 
 /*main stop*/
 

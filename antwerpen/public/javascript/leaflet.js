@@ -82,9 +82,22 @@ fetch('/buurt')
       layer.setStyle(myStyleBuurt);
       layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
+     
+
     }
   }).addTo(buurt);
 })
+
+
+
+
+
+
+
+
+
+
+
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
