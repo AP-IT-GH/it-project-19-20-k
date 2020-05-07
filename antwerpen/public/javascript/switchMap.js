@@ -1,10 +1,12 @@
 let keuzeSwitch;
 
 function showStadOfBuurt() {
-    let el = document.getElementsByClassName('a-switch__label');
-    if(el === 'STADSDEEL'){
-        keuzeSwitch = 0;
-    } else{
+    let baklava = document.getElementById('switch1');
+    if(baklava.checked){
         keuzeSwitch = 1;
+        console.log(keuzeSwitch);
+    } else{
+        keuzeSwitch = 0;
+        console.log(keuzeSwitch);
     }
 }

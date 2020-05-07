@@ -48,9 +48,8 @@ let berendrecht = L.layerGroup();
 let hemiksem = L.layerGroup();
 let aartselaar = L.layerGroup();
 
-
 //API stadsdeel-gebruiksgroen
-if(keuzeSwitch === 0){
+if(keuzeSwitch === true){
 let stadsdeelFetch = fetch('/stadsdeel')
 .then((response) => {
   return response.json();
@@ -70,14 +69,14 @@ let stadsdeelFetch = fetch('/stadsdeel')
   L.geoJSON(data, {
     filter: (features, layer) => {
       let district = features.properties.DISTRICT;
-      if(district === 'Wilrijk'){
+      if(district === 'Antwerpen'){
         return features.properties.DISTRICT;
       }
     }
-  }).addTo(antwerpen2000);
+  }).addTo(antwerpen);
 })
 }
-else if(keuzeSwitch === 1){
+else if(keuzeSwitch === false){
 //API buurt-gebruiksgroen 
 let buurtArray = [];
 fetch('/buurt')
