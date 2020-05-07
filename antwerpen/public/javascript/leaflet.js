@@ -50,7 +50,7 @@ let aartselaar = L.layerGroup();
 
 
 //API stadsdeel-gebruiksgroen
-let stadArray = [];
+if(keuzeSwitch === 0){
 let stadsdeelFetch = fetch('/stadsdeel')
 .then((response) => {
   return response.json();
@@ -62,9 +62,6 @@ let stadsdeelFetch = fetch('/stadsdeel')
       let postcode = features.properties.POSTCODE;
       let district = features.properties.DISTRICT;
       let omschrijving = features.properties.OMSCHRIJVING;
-      for (let i = 0; i < data.features.length; i++) {
-        stadArray[i] = data.features[i];
-      }
       layer.setStyle(myStyleStadsdeel);
       layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
@@ -79,7 +76,8 @@ let stadsdeelFetch = fetch('/stadsdeel')
     }
   }).addTo(antwerpen2000);
 })
-
+}
+else if(keuzeSwitch === 1){
 //API buurt-gebruiksgroen 
 let buurtArray = [];
 fetch('/buurt')
@@ -104,6 +102,7 @@ fetch('/buurt')
     }
   }).addTo(buurt);
 })
+}
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
