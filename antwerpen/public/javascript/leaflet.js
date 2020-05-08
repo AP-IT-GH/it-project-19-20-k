@@ -20,7 +20,20 @@ let myStyleBuurt ={
   fillColor: 'darkpurple',
   color: 'purple'
 }
+let keuzeSwitch;
 
+function showStadOfBuurt() {
+    let baklava = document.getElementById('switch2');
+
+    if(baklava.checked === true){
+        keuzeSwitch = true;
+        console.log(keuzeSwitch);
+        
+    } else{
+        keuzeSwitch = false;
+        console.log(keuzeSwitch);
+    }
+}
 // Layers 
 let stadsdeel = L.layerGroup();
 let buurt = L.layerGroup();
@@ -53,6 +66,8 @@ let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet
 
 
 //API stadsdeel-gebruiksgroen
+
+if(keuzeSwitch){
 let stadsdeelFetch = fetch('/stadsdeel')
 .then((response) => {
   return response.json();
@@ -70,20 +85,22 @@ let stadsdeelFetch = fetch('/stadsdeel')
     }
   }).addTo(stadsdeel);
 
-for (let i = 0; i < arrayDistrict.length; i++) {
+  for (let i = 0; i < arrayDistrict.length; i++) {
   
-  L.geoJSON(data, {
-    filter: (features, layer) => {
-      let district = features.properties.DISTRICT;
-      if(district === arrayDistrictName[i]){
-        return features.properties.DISTRICT;
+    L.geoJSON(data, {
+      filter: (features, layer) => {
+        let district = features.properties.DISTRICT;
+        if(district === arrayDistrictName[i]){
+          return features.properties.DISTRICT;
+        }
+  
       }
-
-    }
-  }).addTo(arrayDistrict[i]);
-}
+    }).addTo(arrayDistrict[i]);
+  }
 })
+}
 
+else{
 
 //API buurt-gebruiksgroen 
 let buurtArray = [];
@@ -106,9 +123,21 @@ fetch('/buurt')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(buurt);
+  for (let i = 0; i < arrayDistrict.length; i++) {
+  
+    L.geoJSON(data, {
+      filter: (features, layer) => {
+        let district = features.properties.DISTRICT;
+        if(district === arrayDistrictName[i]){
+          return features.properties.DISTRICT;
+        }
+  
+      }
+    }).addTo(arrayDistrict[i]);
+  }
   
 })
-
+}
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
