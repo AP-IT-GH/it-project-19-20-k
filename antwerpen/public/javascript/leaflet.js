@@ -20,20 +20,6 @@ let myStyleBuurt ={
   fillColor: 'darkpurple',
   color: 'purple'
 }
-let keuzeSwitch;
-
-function showStadOfBuurt() {
-    let baklava = document.getElementById('switch2');
-
-    if(baklava.checked === true){
-        keuzeSwitch = true;
-        console.log(keuzeSwitch);
-        
-    } else{
-        keuzeSwitch = false;
-        console.log(keuzeSwitch);
-    }
-}
 // Layers 
 let stadsdeel = L.layerGroup();
 let buurt = L.layerGroup();
@@ -66,9 +52,9 @@ let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet
 
 
 //API stadsdeel-gebruiksgroen
+let at = 1;
 
-if(keuzeSwitch){
-let stadsdeelFetch = fetch('/stadsdeel')
+fetch('/stadsdeel')
 .then((response) => {
   return response.json();
 })
@@ -84,7 +70,7 @@ let stadsdeelFetch = fetch('/stadsdeel')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(stadsdeel);
-
+if (at == 0) {
   for (let i = 0; i < arrayDistrict.length; i++) {
   
     L.geoJSON(data, {
@@ -96,11 +82,8 @@ let stadsdeelFetch = fetch('/stadsdeel')
   
       }
     }).addTo(arrayDistrict[i]);
-  }
+  }}
 })
-}
-
-else{
 
 //API buurt-gebruiksgroen 
 let buurtArray = [];
@@ -123,9 +106,13 @@ fetch('/buurt')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(buurt);
+  if (at == 1) {
+
   for (let i = 0; i < arrayDistrict.length; i++) {
   
     L.geoJSON(data, {
+
+      
       filter: (features, layer) => {
         let district = features.properties.DISTRICT;
         if(district === arrayDistrictName[i]){
@@ -134,10 +121,11 @@ fetch('/buurt')
   
       }
     }).addTo(arrayDistrict[i]);
-  }
+  }}
   
 })
-}
+
+
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
