@@ -8,6 +8,7 @@
     "express": "^4.17.1",
     "leaflet": "^1.6.0",
     "leaflet-routing-machine": "^3.2.12",
+    "mongodb": "^3.5.7",
     "node-fetch": "^2.6.0",
     "readline-sync": "^1.4.10",
     "request": "^2.88.2"
