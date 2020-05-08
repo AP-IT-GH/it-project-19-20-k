@@ -287,6 +287,9 @@ footer p {
   color: white;
 margin: auto;
 }
+button a {
+  color: white;
+}
 /*FOOTER EINDE*/
 
 /* Zoom Animation LOGIN FORM */
