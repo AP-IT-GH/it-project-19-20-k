@@ -48,8 +48,11 @@ let berendrecht = L.layerGroup();
 let hemiksem = L.layerGroup();
 let aartselaar = L.layerGroup();
 
+let arrayDistrict=[aartselaar,antwerpen,berchem,berendrecht,borgerhout,borsbeek,brasschaat,deurne,edegem,ekeren,hemiksem,hoboken,kapellen,merksem,mortsel,schoten,stabroek,wijnegem,wilrijk,wommelgem,zwijndrecht]
+let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet-Lillo','Borgerhout','Borsbeek','Brasschaat','Deurne','Edegem','Ekeren','Hemiksem','Hoboken','Kapellen','Merksem','Mortsel','Schoten','Stabroek','Wijnegem','Wilrijk','Wommelgem','Zwijndrecht']
+
+
 //API stadsdeel-gebruiksgroen
-if(keuzeSwitch === true){
 let stadsdeelFetch = fetch('/stadsdeel')
 .then((response) => {
   return response.json();
@@ -66,17 +69,22 @@ let stadsdeelFetch = fetch('/stadsdeel')
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
     }
   }).addTo(stadsdeel);
+
+for (let i = 0; i < arrayDistrict.length; i++) {
+  
   L.geoJSON(data, {
     filter: (features, layer) => {
       let district = features.properties.DISTRICT;
-      if(district === 'Antwerpen'){
+      if(district === arrayDistrictName[i]){
         return features.properties.DISTRICT;
       }
+
     }
-  }).addTo(antwerpen);
-})
+  }).addTo(arrayDistrict[i]);
 }
-else if(keuzeSwitch === false){
+})
+
+
 //API buurt-gebruiksgroen 
 let buurtArray = [];
 fetch('/buurt')
@@ -96,12 +104,11 @@ fetch('/buurt')
       layer.setStyle(myStyleBuurt);
       layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
       <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
-     
-
     }
   }).addTo(buurt);
+  
 })
-}
+
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
