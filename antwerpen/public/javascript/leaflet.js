@@ -50,7 +50,6 @@ let aartselaar = L.layerGroup();
 let arrayDistrict=[aartselaar,antwerpen,berchem,berendrecht,borgerhout,borsbeek,brasschaat,deurne,edegem,ekeren,hemiksem,hoboken,kapellen,merksem,mortsel,schoten,stabroek,wijnegem,wilrijk,wommelgem,zwijndrecht]
 let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet-Lillo','Borgerhout','Borsbeek','Brasschaat','Deurne','Edegem','Ekeren','Hemiksem','Hoboken','Kapellen','Merksem','Mortsel','Schoten','Stabroek','Wijnegem','Wilrijk','Wommelgem','Zwijndrecht']
 
-
 //API stadsdeel-gebruiksgroen
 let at = 1;
 
@@ -59,27 +58,24 @@ fetch('/stadsdeel')
   return response.json();
 })
 .then((data) => {
-  L.geoJSON(data, {
-    onEachFeature: (features, layer) => {
-      let naam = features.properties.NAAM;
-      let postcode = features.properties.POSTCODE;
-      let district = features.properties.DISTRICT;
-      let omschrijving = features.properties.OMSCHRIJVING;
-      layer.setStyle(myStyleStadsdeel);
-      layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-      <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
-    }
-  }).addTo(stadsdeel);
-if (at == 0) {
+
+if (at == 1) {
   for (let i = 0; i < arrayDistrict.length; i++) {
-  
     L.geoJSON(data, {
+      onEachFeature: (features, layer) => {
+        let naam = features.properties.NAAM;
+        let postcode = features.properties.POSTCODE;
+        let district = features.properties.DISTRICT;
+        let omschrijving = features.properties.OMSCHRIJVING;
+        layer.setStyle(myStyleStadsdeel);
+        layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+        <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
+      } ,
       filter: (features, layer) => {
         let district = features.properties.DISTRICT;
         if(district === arrayDistrictName[i]){
           return features.properties.DISTRICT;
         }
-  
       }
     }).addTo(arrayDistrict[i]);
   }}
@@ -92,40 +88,27 @@ fetch('/buurt')
   return response.json();
 })
 .then(data => {
-  L.geoJSON(data, {
-  onEachFeature: (features, layer) => {
-      let naam = features.properties.NAAM;
-      let postcode = features.properties.POSTCODE;
-      let district = features.properties.DISTRICT;
-      let omschrijving = features.properties.OMSCHRIJVING;
-      for (let i = 0; i < data.features.length; i++) {
-        buurtArray[i] = data.features[i];
-      }
-      layer.setStyle(myStyleBuurt);
-      layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-      <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
-    }
-  }).addTo(buurt);
   if (at == 1) {
-
   for (let i = 0; i < arrayDistrict.length; i++) {
-  
     L.geoJSON(data, {
-
-      
+      onEachFeature: (features, layer) => {
+        let naam = features.properties.NAAM;
+        let postcode = features.properties.POSTCODE;
+        let district = features.properties.DISTRICT;
+        let omschrijving = features.properties.OMSCHRIJVING;
+        layer.setStyle(myStyleStadsdeel);
+        layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+        <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
+      } ,
       filter: (features, layer) => {
         let district = features.properties.DISTRICT;
         if(district === arrayDistrictName[i]){
           return features.properties.DISTRICT;
         }
-  
       }
     }).addTo(arrayDistrict[i]);
   }}
-  
 })
-
-
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
