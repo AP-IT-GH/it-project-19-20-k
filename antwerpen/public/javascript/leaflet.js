@@ -52,43 +52,44 @@ let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet
 
 //API stadsdeel-gebruiksgroen
 let at = 1;
-
+const stadsdeelFunction = () => {
 fetch('/stadsdeel')
 .then((response) => {
   return response.json();
 })
 .then((data) => {
-
-if (at == 1) {
-  for (let i = 0; i < arrayDistrict.length; i++) {
-    L.geoJSON(data, {
-      onEachFeature: (features, layer) => {
-        let naam = features.properties.NAAM;
-        let postcode = features.properties.POSTCODE;
-        let district = features.properties.DISTRICT;
-        let omschrijving = features.properties.OMSCHRIJVING;
-        layer.setStyle(myStyleStadsdeel);
-        layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-        <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
-      } ,
-      filter: (features, layer) => {
-        let district = features.properties.DISTRICT;
-        if(district === arrayDistrictName[i]){
-          return features.properties.DISTRICT;
+  if (true) {
+    for (let i = 0; i < arrayDistrict.length; i++) {
+      L.geoJSON(data, {
+        onEachFeature: (features, layer) => {
+          let naam = features.properties.NAAM;
+          let postcode = features.properties.POSTCODE;
+          let district = features.properties.DISTRICT;
+          let omschrijving = features.properties.OMSCHRIJVING;
+          layer.setStyle(myStyleStadsdeel);
+          layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+          <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
+        },
+        filter: (features, layer) => {
+          let district = features.properties.DISTRICT;
+          if(district === arrayDistrictName[i]){
+            return features.properties.DISTRICT;
+          }
         }
-      }
-    }).addTo(arrayDistrict[i]);
-  }}
+      }).addTo(arrayDistrict[i]);
+    }
+  }
 })
+}
 
-//API buurt-gebruiksgroen 
-let buurtArray = [];
+//API buurt-gebruiksgroen
+const buurtFunction = () => {
 fetch('/buurt')
 .then((response) => {
   return response.json();
 })
 .then(data => {
-  if (at == 1) {
+  if (true)  {
   for (let i = 0; i < arrayDistrict.length; i++) {
     L.geoJSON(data, {
       onEachFeature: (features, layer) => {
@@ -96,10 +97,10 @@ fetch('/buurt')
         let postcode = features.properties.POSTCODE;
         let district = features.properties.DISTRICT;
         let omschrijving = features.properties.OMSCHRIJVING;
-        layer.setStyle(myStyleStadsdeel);
+        layer.setStyle(myStyleBuurt);
         layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
         <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div>`);
-      } ,
+      },
       filter: (features, layer) => {
         let district = features.properties.DISTRICT;
         if(district === arrayDistrictName[i]){
@@ -109,6 +110,19 @@ fetch('/buurt')
     }).addTo(arrayDistrict[i]);
   }}
 })
+}
+//switch voor stadsdeel en buurt
+function showStadOfBuurt(){
+  let el = document.getElementById('switch2');
+  if(el.checked){
+    console.log('checked');
+    buurtFunction();
+  }
+  else if(el.checked === false){
+    console.log('unchecked');
+    stadsdeelFunction();
+  }
+}
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
