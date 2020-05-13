@@ -117,6 +117,7 @@ function showStadOfBuurt(){
   if(el.checked){
     console.log('checked');
     buurtFunction();
+    
   }
   else if(el.checked === false){
     console.log('unchecked');
