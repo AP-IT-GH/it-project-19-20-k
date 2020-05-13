@@ -6,6 +6,7 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "firebase": "^7.14.3",
     "leaflet": "^1.6.0",
     "leaflet-routing-machine": "^3.2.12",
     "mongodb": "^3.5.7",

@@ -3,10 +3,10 @@ let myMap = L.map('stationMap', {
     zoom: 12
   });
   
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+  let tileLayerMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     id: 'mapbox.streets',
-  accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.i/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+    accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.i/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
 }).addTo(myMap);
 
 
@@ -47,8 +47,8 @@ let berendrecht = L.layerGroup();
 let hemiksem = L.layerGroup();
 let aartselaar = L.layerGroup();
 
-let arrayDistrict=[aartselaar,antwerpen,berchem,berendrecht,borgerhout,borsbeek,brasschaat,deurne,edegem,ekeren,hemiksem,hoboken,kapellen,merksem,mortsel,schoten,stabroek,wijnegem,wilrijk,wommelgem,zwijndrecht]
-let arrayDistrictName=['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet-Lillo','Borgerhout','Borsbeek','Brasschaat','Deurne','Edegem','Ekeren','Hemiksem','Hoboken','Kapellen','Merksem','Mortsel','Schoten','Stabroek','Wijnegem','Wilrijk','Wommelgem','Zwijndrecht']
+let arrayDistrict = [aartselaar,antwerpen,berchem,berendrecht,borgerhout,borsbeek,brasschaat,deurne,edegem,ekeren,hemiksem,hoboken,kapellen,merksem,mortsel,schoten,stabroek,wijnegem,wilrijk,wommelgem,zwijndrecht]
+let arrayDistrictName = ['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet-Lillo','Borgerhout','Borsbeek','Brasschaat','Deurne','Edegem','Ekeren','Hemiksem','Hoboken','Kapellen','Merksem','Mortsel','Schoten','Stabroek','Wijnegem','Wilrijk','Wommelgem','Zwijndrecht']
 
 //API stadsdeel-gebruiksgroen
 let at = 1;
@@ -73,13 +73,13 @@ fetch('/stadsdeel')
         filter: (features, layer) => {
           let district = features.properties.DISTRICT;
           if(district === arrayDistrictName[i]){
-            return features.properties.DISTRICT;
+              return features.properties.DISTRICT;
+            }
           }
-        }
-      }).addTo(arrayDistrict[i]);
+        }).addTo(arrayDistrict[i]);
+      }
     }
-  }
-})
+  })
 }
 
 //API buurt-gebruiksgroen
@@ -111,16 +111,23 @@ fetch('/buurt')
   }}
 })
 }
+
 //switch voor stadsdeel en buurt
-function showStadOfBuurt(){
+const showStadOfBuurt = () => {
   let el = document.getElementById('switch2');
   if(el.checked){
-    console.log('checked');
+    myMap.eachLayer(function (layer) {
+      myMap.removeLayer(layer);
+    });
+    myMap.addLayer(tileLayerMap);
     buurtFunction();
     
   }
   else if(el.checked === false){
-    console.log('unchecked');
+    myMap.eachLayer(function (layer) {
+      myMap.removeLayer(layer);
+    });
+    myMap.addLayer(tileLayerMap);
     stadsdeelFunction();
   }
 }
