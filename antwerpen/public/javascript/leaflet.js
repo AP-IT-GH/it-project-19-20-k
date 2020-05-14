@@ -107,6 +107,30 @@ fetch('/buurt')
     }).addTo(arrayDistrict[i]);
   }}
 })
+<<<<<<< HEAD
+=======
+}
+
+//switch voor stadsdeel en buurt
+const showStadOfBuurt = () => {
+  let el = document.getElementById('switch2');
+  if(el.checked){
+    myMap.eachLayer(function (layer) {
+      myMap.removeLayer(layer);
+    });
+    myMap.addLayer(tileLayerMap);
+    buurtFunction();
+    
+  }
+  else if(el.checked === false){
+    myMap.eachLayer(function (layer) {
+      myMap.removeLayer(layer);
+    });
+    myMap.addLayer(tileLayerMap);
+    stadsdeelFunction();
+  }
+}
+>>>>>>> e18401ccdb51c30aaa282c2ad83614b5d09466d9
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
