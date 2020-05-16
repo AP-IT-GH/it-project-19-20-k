@@ -66,6 +66,7 @@
           <a href="/index.HTML#contact"><h3>CONTACT</h3></a>
         </div>
       </nav>
+      
   </header>
 
 
@@ -74,17 +75,11 @@
     <h2 id="plaatsenLijst">Plaatsen</h2>
 
     <!--Switch voor stadsdeel en buurt-->
-    <div class="a-input">
-      <label class="h5">Kies niveau</label>
-      <div class="a-switch">
-        <label class="a-switch__label">STADSDEEL</label>
-        <div class="a-switch__toggle">
-          <input type="checkbox" name="switch2" id="switch2" role="switch" onclick="showStadOfBuurt()">
-          <label for="switch2"><span class="u-screen-reader-only">Toggle switch</span></label>
-        </div>
-        <label class="a-switch__label">BUURT</label>
-      </div>
-    </div>
+
+    <input type="checkbox" id="stadsDeelCheck"  onclick="myFunction()">
+    <label for="stadsDeelCheck">Stadsdeel</label>
+    <input type="checkbox" id="buurtCheck"  onclick="myFunction()">
+    <label for="buurtCheck">Buurt</label>
 
     <div id="stationMap" style="z-index: 0;"></div>
     <br><br><br>

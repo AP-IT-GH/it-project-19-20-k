@@ -51,15 +51,22 @@ let arrayDistrict = [aartselaar,antwerpen,berchem,berendrecht,borgerhout,borsbee
 let arrayDistrictName = ['Aartselaar','Antwerpen','Berchem','Berendrecht-Zandvliet-Lillo','Borgerhout','Borsbeek','Brasschaat','Deurne','Edegem','Ekeren','Hemiksem','Hoboken','Kapellen','Merksem','Mortsel','Schoten','Stabroek','Wijnegem','Wilrijk','Wommelgem','Zwijndrecht']
 
 //API stadsdeel-gebruiksgroen
-let at = 1;
+
+function myFunction() {
+  let getStadsdeel = document.getElementById("stadsDeelCheck");
+  let getBuurt = document.getElementById("buurtCheck");
+  let baklava;
+  let atak;
+
+  if (getStadsdeel.checked){
+
 fetch('/stadsdeel')
 .then((response) => {
   return response.json();
 })
 .then((data) => {
-  if (at === 1) {
     for (let i = 0; i < arrayDistrict.length; i++) {
-      L.geoJSON(data, {
+      baklava = L.geoJSON(data, {
         onEachFeature: (features, layer) => {
           let naam = features.properties.NAAM;
           let postcode = features.properties.POSTCODE;
@@ -77,18 +84,19 @@ fetch('/stadsdeel')
           }
         }).addTo(arrayDistrict[i]);
       }
-    }
   })
+}
 
-//API buurt-gebruiksgroen
+else if (getBuurt.checked) {
+
+    //API buurt-gebruiksgroen
 fetch('/buurt')
 .then((response) => {
   return response.json();
 })
 .then(data => {
-  if (at === 0)  {
   for (let i = 0; i < arrayDistrict.length; i++) {
-    L.geoJSON(data, {
+    atak = L.geoJSON(data, {
       onEachFeature: (features, layer) => {
         let naam = features.properties.NAAM;
         let postcode = features.properties.POSTCODE;
@@ -105,32 +113,10 @@ fetch('/buurt')
         }
       }
     }).addTo(arrayDistrict[i]);
-  }}
+  }
 })
-<<<<<<< HEAD
-=======
+  } 
 }
-
-//switch voor stadsdeel en buurt
-const showStadOfBuurt = () => {
-  let el = document.getElementById('switch2');
-  if(el.checked){
-    myMap.eachLayer(function (layer) {
-      myMap.removeLayer(layer);
-    });
-    myMap.addLayer(tileLayerMap);
-    buurtFunction();
-    
-  }
-  else if(el.checked === false){
-    myMap.eachLayer(function (layer) {
-      myMap.removeLayer(layer);
-    });
-    myMap.addLayer(tileLayerMap);
-    stadsdeelFunction();
-  }
-}
->>>>>>> e18401ccdb51c30aaa282c2ad83614b5d09466d9
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +

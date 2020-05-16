@@ -1,8 +1,3 @@
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
 function message(e){
     e.preventDefault();
     let myList = document.getElementById('loginFormActief');

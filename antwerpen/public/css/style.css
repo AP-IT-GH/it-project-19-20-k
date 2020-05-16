@@ -2,6 +2,12 @@
   margin: 0px;
   padding: 0px;
 }
+button, input, input[type=search], select, textarea {
+  -webkit-appearance: checkbox; 
+ font: inherit;
+ margin: 0;
+ outline: none;
+}
 h5{
   text-align: center;
 }
