@@ -95,14 +95,39 @@ myMap.on('click', function(e) {
 });
 });
 
-//function route popup
-function routeFunction(e){
-let control = L.Routing.control({
-  waypoints: [
-    L.latLng(latitude,longitude)
-  ]})
-  control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
-}
+fetch('/stadsdeel')
+.then((response) => {
+  return response.json();
+})
+.then((data) => {
+    for (let i = 0; i < arrayDistrict.length; i++) {
+      baklava = L.geoJSON(data, {
+        onEachFeature: (features, layer) => {
+          let naam = features.properties.NAAM;
+          let postcode = features.properties.POSTCODE;
+          let district = features.properties.DISTRICT;
+          let omschrijving = features.properties.OMSCHRIJVING;
+          layer.setStyle(myStyleStadsdeel);
+          layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+          <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+          <button onclick="myFunction()"> Klik voor route </button><br> 
+          <div class="pretty p-switch p-fill">
+            <input type="checkbox" />
+            <div class="state">
+              <label>Kies als favoriet</label>
+            </div>
+          </div>`)
+        },
+        filter: (features, layer) => {
+          let district = features.properties.DISTRICT;
+          if(district === arrayDistrictName[i]){
+              return features.properties.DISTRICT;
+            }
+          }
+        }).addTo(arrayDistrict[i]);
+      }
+  })
+
 
 let stadsdeelData = [];
 let buurtData = [];
@@ -115,6 +140,7 @@ let getBuurt = document.getElementById("radio2");
 getStadsdeel.addEventListener('click', () => {
   if (getStadsdeel.checked) {
 
+<<<<<<< HEAD
     arrayDistrict.forEach(layer => layer.clearLayers());
   
     fetch('/stadsdeel')
@@ -139,6 +165,35 @@ getStadsdeel.addEventListener('click', () => {
             if(district === arrayDistrictName[i]){
               return features.properties.DISTRICT;
             }
+=======
+fetch('/stadsdeel')
+.then((response) => {
+return response.json();
+})
+.then((data) => {
+  for (let i = 0; i < arrayDistrict.length; i++) {
+    baklava = L.geoJSON(data, {
+      onEachFeature: (features, layer) => {
+        let naam = features.properties.NAAM;
+        let postcode = features.properties.POSTCODE;
+        let district = features.properties.DISTRICT;
+        let omschrijving = features.properties.OMSCHRIJVING;
+        layer.setStyle(myStyleStadsdeel);
+        layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+          <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+          <button onclick="myFunction()"> Klik voor route </button><br>
+          <div class="pretty p-switch p-fill">
+            <input type="checkbox" />
+            <div class="state">
+              <label>Kies als favoriet</label>
+            </div>
+          </div>`)
+      },
+      filter: (features, layer) => {
+        let district = features.properties.DISTRICT;
+        if(district === arrayDistrictName[i]){
+            return features.properties.DISTRICT;
+>>>>>>> 3e5351a2e50e3f55d4fe7122d1860e802586702b
           }
         }).addTo(arrayDistrict[i]);
       }

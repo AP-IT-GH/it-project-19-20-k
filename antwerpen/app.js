@@ -1,11 +1,24 @@
 let fetch = require('node-fetch');
 const express = require('express');
 const ejs = require('ejs');
-
 const app = express();
+const bodyParser= require('body-parser');
+
+//Hashing van het wachtwoord
+const CryptoJS = require('crypto-js');
+
+//DATABASE
+const {MongoClient} = require('mongodb');
+const uri = 'mongodb+srv://youssef:dbyoussef@apcluster-emjou.mongodb.net/test?retryWrites=true&w=majority';
+const DATABASE = 'ProjectK';
+const USERS_COLLECTION = 'Users';
+
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+
+//Zorgt voor data te ontvangen van de <form> element
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req,res) => {
   res.render('index');
@@ -28,6 +41,41 @@ app.get('/buurt', (req,res) =>{
     res.json(buurtData);
   });
 });
+
+//Data van de register form ontvangen en verwerken in mongoDB
+app.post('/register', async(req, res) => {
+  try{
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    await client.connect();
+    let username = req.body.username;
+    let password = req.body.psw;
+    let user = {
+      username: username,
+      password: CryptoJS.MD5(password).toString()
+    }
+    
+    if(password != req.body.pswRepeat){
+      console.log('wachtwoord is niet identiek');
+    }
+    else if(client.db(DATABASE).collection(USERS_COLLECTION).findOne({username: req.body.username})){
+      console.log('gebruikersnaam is al in gebruik');
+    }
+    /*else if(username === username && password === password){
+      console.log('Deze gebruiker bestaat al');
+    }*/
+    else{
+    await client.db(DATABASE).collection(USERS_COLLECTION).insertOne(user);
+    }
+    console.log(client);
+  }
+  catch(exc){
+    console.log(exc);
+  }
+  finally{
+    res.redirect('/');
+    await client.close();
+  }
+})
 
 app.listen(app.get('port'), () => {
   console.log(`Express started on http://localhost:${app.get('port')}; press Ctrl-C to terminate.`);
