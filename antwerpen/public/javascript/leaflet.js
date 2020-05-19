@@ -121,8 +121,8 @@ getStadsdeel.addEventListener('click', () => {
           let district = features.properties.DISTRICT;
           let omschrijving = features.properties.OMSCHRIJVING;
           layer.setStyle(myStyleStadsdeel);
-          layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-          <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+          layer.bindPopup(`<div class = 'popup'>${naam} <br> ${postcode} 
+          ${district} <br> ${omschrijving}</div><hr>
           <button id= "idRoute"> Klik voor route </button><br><br>
           <div class="pretty p-switch p-fill">
             <input type="checkbox" />
@@ -169,8 +169,8 @@ getBuurt.addEventListener('click', () => {
             let district = features.properties.DISTRICT;
             let omschrijving = features.properties.OMSCHRIJVING;
             layer.setStyle(myStyleBuurt);
-            layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-            <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+            layer.bindPopup(`<div class = 'popup'>${naam} <br> ${postcode} 
+            ${district} <br> ${omschrijving}</div><hr>
             <button id= "idRoute"> Klik voor route </button><br><br>
             <div class="pretty p-switch p-fill">
               <input type="checkbox" />
