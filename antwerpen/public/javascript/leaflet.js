@@ -9,6 +9,8 @@ let tileLayerMap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.i/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
 }).addTo(myMap);
 
+//COntrol
+let control;
 
 //Kleur voor polygons
 let myStyleStadsdeel = {
@@ -56,7 +58,7 @@ latitude = location.coords.latitude;
 longitude = location.coords.longitude;
 
 //routing
-let control = L.Routing.control({
+control = L.Routing.control({
   waypoints: [
     L.latLng(latitude,longitude),
   ],
@@ -121,7 +123,21 @@ getStadsdeel.addEventListener('click', () => {
           layer.setStyle(myStyleStadsdeel);
           layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
           <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-          <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`)
+          <button id= "idRoute"> Klik voor route </button><br><br>
+          <div class="pretty p-switch p-fill">
+            <input type="checkbox" />
+            <div class="state">
+              <label>Kies als favoriet</label>
+            </div>
+          </div>`,
+          layer.bindPopup,
+          layer.on('popupopen', function (e) {
+            let destBtn = document.getElementById("idRoute")
+            L.DomEvent.on(destBtn, 'click', function() {
+              control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.popup.getLatLng())
+              myMap.closePopup();
+          })
+        }))
         },
         filter: (features, layer) => {
           let district = features.properties.DISTRICT;
@@ -154,8 +170,22 @@ getBuurt.addEventListener('click', () => {
             let omschrijving = features.properties.OMSCHRIJVING;
             layer.setStyle(myStyleBuurt);
             layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-              <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-              <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`);           
+            <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+            <button id= "idRoute"> Klik voor route </button><br><br>
+            <div class="pretty p-switch p-fill">
+              <input type="checkbox" />
+              <div class="state">
+                <label>Kies als favoriet</label>
+              </div>
+            </div>`,
+              layer.bindPopup,
+              layer.on('popupopen', function (e) {
+                let destBtn = document.getElementById("idRoute")
+                L.DomEvent.on(destBtn, 'click', function() {
+                  control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.popup.getLatLng())
+                  myMap.closePopup();
+              })
+            }))        
             },
 
             filter: (features, layer) => {
