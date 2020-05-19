@@ -75,7 +75,13 @@ fetch('/stadsdeel')
           layer.setStyle(myStyleStadsdeel);
           layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
           <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-          <button onclick="myFunction()"> Klik voor route </button>`)
+          <button onclick="myFunction()"> Klik voor route </button><br> 
+          <div class="pretty p-switch p-fill">
+            <input type="checkbox" />
+            <div class="state">
+              <label>Kies als favoriet</label>
+            </div>
+          </div>`)
         },
         filter: (features, layer) => {
           let district = features.properties.DISTRICT;
@@ -106,7 +112,13 @@ fetch('/buurt')
         layer.setStyle(myStyleBuurt);
         layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
           <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-          <button onclick="myFunction()"> Klik voor route </button>`)
+          <button onclick="myFunction()"> Klik voor route </button><br>
+          <div class="pretty p-switch p-fill">
+            <input type="checkbox" />
+            <div class="state">
+              <label>Kies als favoriet</label>
+            </div>
+          </div>`)
       },
       filter: (features, layer) => {
         let district = features.properties.DISTRICT;
