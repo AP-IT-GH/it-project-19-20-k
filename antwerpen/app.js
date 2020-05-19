@@ -4,7 +4,11 @@ const ejs = require('ejs');
 const app = express();
 const bodyParser= require('body-parser');
 
+//Hashing van het wachtwoord
+const CryptoJS = require('crypto-js');
+
 //DATABASE
+const {MongoClient} = require('mongodb');
 const uri = 'mongodb+srv://youssef:dbyoussef@apcluster-emjou.mongodb.net/test?retryWrites=true&w=majority';
 const DATABASE = 'ProjectK';
 const USERS_COLLECTION = 'Users';
@@ -41,18 +45,24 @@ app.get('/buurt', (req,res) =>{
 //Data van de register form ontvangen en verwerken in mongoDB
 app.post('/register', async(req, res) => {
   try{
-    const {MongoClient} = require('mongodb');
     const client = new MongoClient(uri, { useUnifiedTopology: true });
     await client.connect();
+    let username = req.body.username;
+    let password = req.body.psw;
     let user = {
-      email: req.body.email,
-      password: req.body.psw
+      username: username,
+      password: CryptoJS.MD5(password).toString()
     }
-    console.log(req.body);
-    await client.db(DATABASE).collection(USERS_COLLECTION).deleteMany({});
-    if(req.body.psw != req.body.pswRepeat){
-      alert('wrong password!');
+    
+    if(password != req.body.pswRepeat){
+      console.log('wachtwoord is niet identiek');
     }
+    else if(client.db(DATABASE).collection(USERS_COLLECTION).findOne({username: req.body.username})){
+      console.log('gebruikersnaam is al in gebruik');
+    }
+    /*else if(username === username && password === password){
+      console.log('Deze gebruiker bestaat al');
+    }*/
     else{
     await client.db(DATABASE).collection(USERS_COLLECTION).insertOne(user);
     }
@@ -62,7 +72,7 @@ app.post('/register', async(req, res) => {
     console.log(exc);
   }
   finally{
-    res.redirect('/')
+    res.redirect('/');
     await client.close();
   }
 })

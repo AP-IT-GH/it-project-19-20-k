@@ -92,14 +92,14 @@
         <p>Please fill in this form to create an account.</p>
         <hr>
     
-        <label for="email"><b>E-mail</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <label for="username"><b>Gebruikersnaam</b></label>
+        <input type="text" placeholder="gebruikersnaam" name="username" required>
     
         <label for="psw"><b>Wachtwoord</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="Min 8 tekens, max 16" name="psw" pattern=".{8,16}" required>
     
         <label for="pswRepeat"><b>Herhaal uw wachtwoord</b></label>
-        <input type="password" placeholder="Repeat Password" name="pswRepeat" required>
+        <input type="password" placeholder="Herhaal Password" name="pswRepeat" pattern=".{8,16}" required>
         <hr>
     
         <button type="submit" class="registerbtn">Register</button>
