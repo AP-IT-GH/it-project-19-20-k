@@ -47,6 +47,7 @@ app.post('/register', async(req, res) => {
   try{
     const client = new MongoClient(uri, { useUnifiedTopology: true });
     await client.connect();
+    console.log(req.body);
     let username = req.body.username;
     let password = req.body.psw;
     let user = {
@@ -54,25 +55,14 @@ app.post('/register', async(req, res) => {
       password: CryptoJS.MD5(password).toString()
     }
     
-    if(password != req.body.pswRepeat){
-      console.log('wachtwoord is niet identiek');
-    }
-    else if(client.db(DATABASE).collection(USERS_COLLECTION).findOne({username: req.body.username})){
-      console.log('gebruikersnaam is al in gebruik');
-    }
-    /*else if(username === username && password === password){
-      console.log('Deze gebruiker bestaat al');
-    }*/
-    else{
     await client.db(DATABASE).collection(USERS_COLLECTION).insertOne(user);
-    }
     console.log(client);
   }
   catch(exc){
     console.log(exc);
   }
   finally{
-    res.redirect('/');
+    //res.redirect('/');
     await client.close();
   }
 })
