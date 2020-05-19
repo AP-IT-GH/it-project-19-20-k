@@ -21,8 +21,6 @@ fillColor: 'darkpurple',
 color: 'purple'
 }
 // Layers 
-let stadsdeel = L.layerGroup();
-let buurt = L.layerGroup();
 let antwerpen = L.layerGroup();
 let hoboken = L.layerGroup();
 let berchem = L.layerGroup();
@@ -106,74 +104,84 @@ let control = L.Routing.control({
   control.spliceWaypoints(control.getWaypoints().length - 1, 1, e.latlng);
 }
 
+let stadsdeelData = [];
+let buurtData = [];
+
 //API stadsdeel-gebruiksgroen
-function myFunction(e) {
-let getStadsdeel = document.getElementById("stadsDeelCheck");
-let getBuurt = document.getElementById("buurtCheck");
-let baklava;
-let atak;
+let getStadsdeel = document.getElementById("radio1");
+let getBuurt = document.getElementById("radio2");
 
-if (getStadsdeel.checked){
+// Elke keer als da verandert doen we dit
+getStadsdeel.addEventListener('click', () => {
+  if (getStadsdeel.checked) {
 
-fetch('/stadsdeel')
-.then((response) => {
-return response.json();
-})
-.then((data) => {
-  for (let i = 0; i < arrayDistrict.length; i++) {
-    baklava = L.geoJSON(data, {
-      onEachFeature: (features, layer) => {
-        let naam = features.properties.NAAM;
-        let postcode = features.properties.POSTCODE;
-        let district = features.properties.DISTRICT;
-        let omschrijving = features.properties.OMSCHRIJVING;
-        layer.setStyle(myStyleStadsdeel);
-        layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-        <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-        <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`)
-      },
-      filter: (features, layer) => {
-        let district = features.properties.DISTRICT;
-        if(district === arrayDistrictName[i]){
-            return features.properties.DISTRICT;
+    arrayDistrict.forEach(layer => layer.clearLayers());
+  
+    fetch('/stadsdeel')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        for (let i = 0; i < arrayDistrict.length; i++) {
+          stadsdeelData = L.geoJSON(data, {
+          onEachFeature: (features, layer) => {
+          let naam = features.properties.NAAM;
+          let postcode = features.properties.POSTCODE;
+          let district = features.properties.DISTRICT;
+          let omschrijving = features.properties.OMSCHRIJVING;
+          layer.setStyle(myStyleStadsdeel);
+          layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+          <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+          <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`)
+        },
+        filter: (features, layer) => {
+          let district = features.properties.DISTRICT;
+            if(district === arrayDistrictName[i]){
+              return features.properties.DISTRICT;
+            }
           }
-        }
-      }).addTo(arrayDistrict[i]);
-    }
-})
-}
-
-else if (getBuurt.checked) {
-
-  //API buurt-gebruiksgroen
-fetch('/buurt')
-.then((response) => {
-return response.json();
-})
-.then(data => {
-for (let i = 0; i < arrayDistrict.length; i++) {
-  atak = L.geoJSON(data, {
-    onEachFeature: (features, layer) => {
-      let naam = features.properties.NAAM;
-      let postcode = features.properties.POSTCODE;
-      let district = features.properties.DISTRICT;
-      let omschrijving = features.properties.OMSCHRIJVING;
-      layer.setStyle(myStyleBuurt);
-      layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
-        <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
-        <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`)
-    },
-    filter: (features, layer) => {
-      let district = features.properties.DISTRICT;
-      if(district === arrayDistrictName[i]){
-        return features.properties.DISTRICT;
+        }).addTo(arrayDistrict[i]);
       }
-    }
-  }).addTo(arrayDistrict[i]);
-}
+    })
+  }
 })
-} 
-}
+
+getBuurt.addEventListener('click', () => {
+  if (getBuurt.checked) {
+    arrayDistrict.forEach(layer => layer.clearLayers());
+  
+    //API buurt-gebruiksgroen
+    fetch('/buurt')
+      .then((response) => {
+        return response.json();
+      })
+      .then(data => {
+        for (let i = 0; i < arrayDistrict.length; i++) {
+          buurtData = L.geoJSON(data, {
+          onEachFeature: (features, layer) => {
+            let naam = features.properties.NAAM;
+            let postcode = features.properties.POSTCODE;
+            let district = features.properties.DISTRICT;
+            let omschrijving = features.properties.OMSCHRIJVING;
+            layer.setStyle(myStyleBuurt);
+            layer.bindPopup(`<div class = 'popup'>${naam}</div> <br> <div class = 'popup'>${postcode}</div> 
+              <div class = 'popup'>${district}</div> <br> <div class = 'popup'>${omschrijving}</div><br>
+              <button id= "idRoute" onclick="routeFunction()"> Klik voor route </button>`);           
+            },
+
+            filter: (features, layer) => {
+              let district = features.properties.DISTRICT;
+              if(district === arrayDistrictName[i]){
+                return features.properties.DISTRICT;
+              }
+            } 
+          }).addTo(arrayDistrict[i]);
+        }
+      })
+    }
+})
+
+
 
 let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -186,12 +194,10 @@ let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoom
 let map = L.map('map', {
   center: [39.73, -104.99],
   zoom: 10,
-  layers: [grayscale, stadsdeel,buurt, aartselaar, antwerpen, berchem, berendrecht, borgerhout, borsbeek, brasschaat, deurne, edegem, ekeren, hemiksem, hoboken, kapellen, merksem, mortsel, schoten, stabroek, wijnegem, wilrijk, wommelgem, zwijndrecht]
+  layers: [aartselaar, antwerpen, berchem, berendrecht, borgerhout, borsbeek, brasschaat, deurne, edegem, ekeren, hemiksem, hoboken, kapellen, merksem, mortsel, schoten, stabroek, wijnegem, wilrijk, wommelgem, zwijndrecht]
 });
 
 let overlays = {
-  "Buurt-gebruiksgroen": buurt,
-  "Stadsdeel-gebruiksgroen": stadsdeel,
   "Aartselaar": aartselaar,
   "Antwerpen":antwerpen,
   "Berchem":berchem,

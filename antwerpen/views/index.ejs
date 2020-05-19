@@ -76,10 +76,17 @@
 
     <!--Switch voor stadsdeel en buurt-->
 
-    <input type="checkbox" id="stadsDeelCheck"  onclick="myFunction()">
-    <label for="stadsDeelCheck">Stadsdeel</label>
-    <input type="checkbox" id="buurtCheck"  onclick="myFunction()">
-    <label for="buurtCheck">Buurt</label>
+    <div class="a-input">
+      <label class="a-input__label">MAAK EEN KEUZE</label>
+      <div class="a-input__radio">
+        <input type="radio" id="radio1" name="input-radio">
+        <label for="radio1">STADSDEEL</label>
+      </div>
+      <div class="a-input__radio">
+        <input type="radio" id="radio2" name="input-radio">
+        <label for="radio2">BUURT</label>
+      </div></div>
+
 
     <div id="stationMap" style="z-index: 0;"></div>
     <br><br><br>
