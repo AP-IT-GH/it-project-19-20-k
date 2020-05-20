@@ -98,11 +98,11 @@ myMap.on('click', function(e) {
 });
 
 
-//API stadsdeel-gebruiksgroen
+//data halen van radio's
 let getStadsdeel = document.getElementById("radio1");
 let getBuurt = document.getElementById("radio2");
 
-// Elke keer als da verandert doen we dit
+//API stadsdeel-gebruiksgroen en filteren
 getStadsdeel.addEventListener('click', () => {
   if (getStadsdeel.checked) {
 
@@ -155,7 +155,7 @@ getBuurt.addEventListener('click', () => {
   if (getBuurt.checked) {
     arrayDistrict.forEach(layer => layer.clearLayers());
   
-    //API buurt-gebruiksgroen
+    //API buurt-gebruiksgroen en filteren
     fetch('/buurt')
       .then((response) => {
         return response.json();
@@ -210,12 +210,14 @@ let mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStree
 let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
   streets  = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
 
+  //overlays toevoegen aan map
 let map = L.map('map', {
   center: [39.73, -104.99],
   zoom: 10,
   layers: [aartselaar, antwerpen, berchem, berendrecht, borgerhout, borsbeek, brasschaat, deurne, edegem, ekeren, hemiksem, hoboken, kapellen, merksem, mortsel, schoten, stabroek, wijnegem, wilrijk, wommelgem, zwijndrecht]
 });
 
+//overlays maken voor elke buurt
 let overlays = {
   "Aartselaar": aartselaar,
   "Antwerpen":antwerpen,

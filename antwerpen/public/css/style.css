@@ -43,7 +43,7 @@ input[type=text], input[type=password] {
 }
   
 /* instellingen voor login button in login */
-#loginButton {
+#registerbtn {
   background-color: #0064B4;
   color: white;
   padding: 14px 20px;
@@ -53,7 +53,7 @@ input[type=text], input[type=password] {
   width: 100%;
 }
   
-#loginButton:hover {
+#registerbtn:hover {
   opacity: 0.8;
 }
   
@@ -120,7 +120,7 @@ margin-top: 5px;
 header {
 background-color: white;
   height: 100%;
-  border-bottom: 1px solid gray;
+ 
   margin-bottom: 20px;
 }
 header nav{
@@ -141,12 +141,16 @@ header nav ul li{
   height: 100%;
   bottom: 50px;
 }
+
 header nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
-
-  
 }
+
+header nav ul li a:hover{
+  font-size: 50px;
+}
+
 header nav ul li a img{
 background-color:white ;
 padding: 5px;
@@ -157,6 +161,10 @@ width: 60px;
 height: 60px;
 margin-top: 15px;
 }
+header nav ul li a img:hover{
+
+  background-color: lightgreen;
+}
 
 header nav ul li a h3{
   background-color: white;
@@ -165,6 +173,9 @@ header nav ul li a h3{
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 20px;
+}
+.a-toggle{
+  display: none;
 }
   
 /*header finish!*/
@@ -175,12 +186,26 @@ header nav ul li a h3{
 main{
   background-color:white;
 }
+#welkomDiv{
+  text-align: center;
+}
 #welkomBericht{
+ 
+  display: inline-block;
+  border-bottom: 2px solid green;
+}
+#welkomMessage, #welkomText{
   text-align: center;
 }
-#plaatsenLijst{
-  text-align: center;
+.a-input{
+  display: flex;
+justify-content: center;
+align-items: center;
 }
+.a-input__radio{
+  margin: 10px;
+}
+
 main article{
   border: 2px black solid;
   display: inline-block;
@@ -216,27 +241,16 @@ border-bottom: 1px gray solid;
 }
 /* Li items bewerken van list */
 
-/* checkbutton bewerken */
-.leaflet-control-layers-selector{
-  height: 12px;
-  width: 12px;
-  border: 1px black solid;
-  text-align: center;
-}
-.leaflet-control-layers-selector:checked{
-  background-color: green;
-}
-/* checkbutton bewerken */
-
 /*switch bewerken van lijst*/
 .a-input{
 text-align: center;
+margin-bottom: 20px;
 }
 .a-switch{
 display: flex;
 justify-content: center;
 align-items: center;
-margin-bottom: 20px;
+margin-left: 10px;
 }
 /*switch bewerken van lijst*/
 
@@ -326,6 +340,35 @@ button a {
     height: 650px;
     border: black 1px solid;
   }
+  /*navigatie balk voor mobiel activeren*/
+  .a-toggle{
+    display: block;
+  }
+/*animatie hamburger menu*/
+  #navMobile {
+
+    animation: Slide_up 0.6s ease-in-out;
+
+  }
+    
+  @keyframes Slide_up {
+0% {
+    transform: translateY(-100px) 
+}
+100%{
+    transform: translateY(0px) 
+}
+  }
+
+  #navMobile h3{
+text-align: center;
+border-bottom: 2px black solid;
+padding-top: 10px;
+  }
+  #navMobile h3:hover{
+    background-color: green;
+    font-size: 50px;
+  }
 
 /*IMG*/
 #achtergrondPsnMobile{
@@ -361,7 +404,7 @@ img#logoA{
   }
   
   /* instellingen voor login button */
-  .loginButton {
+  #registerbtn {
     background-color: #0064B4;
     color: white;
     padding: 14px 20px;
@@ -371,7 +414,7 @@ img#logoA{
     width: 100%;
   }
   
-  .loginButton:hover {
+  .registerbtn:hover {
     opacity: 0.8;
   }
   
@@ -399,7 +442,7 @@ img#logoA{
     margin: 5% auto 15% auto; 
     border: 1px solid black;
     width: 90%; 
-    height: 50%;
+    height: 60%;
   }
   
   /* Afsluiten van login form (x) */
@@ -465,23 +508,157 @@ header nav div a{
 header nav div a:hover{
   color: white;
 }
-  
+
 
 /*header finish!*/
+
+
 
 main{
   background-color:white;
 }
+#welkomDiv{
+  text-align: center;
+}
+#welkomBericht{
+ 
+  display: inline-block;
+  border-bottom: 2px solid green;
+}
+#welkomMessage, #welkomText{
+  text-align: center;
+}
+.a-input{
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+.a-input__radio{
+  margin: 10px;
+}
 
+main article{
+  border: 2px black solid;
+  display: inline-block;
+  margin-left: 100px;
+  display: none;
+
+}   
+#stationMap {
+  width: 100%;
+  height: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Li items bewerken van list */
+#lijstAPI{
+  display: none;
+  width: 100%;
+}
+#lijstStadsdeel , #lijstBuurt{
+  width: 100%;
+  display: inline-block;
+  
+}
+#lijstStadsdeel li , #lijstBuurt li{
+text-align: left;
+position: relative;
+width: 100%;
+list-style-image: url(../Images/botanical.png);
+margin-left: 25px;
+border-bottom: 1px gray solid;
+
+}
+/* Li items bewerken van list */
+
+
+/*switch bewerken van lijst*/
+.a-input{
+margin-bottom: 50px;
+}
+.a-switch{
+position: absolute;
+top: 40px;
+}
+/*switch bewerken van lijst*/
+
+/*main stop*/
+
+/*FOOTER BEGIN*/
+
+footer{
+  background-color: #282020;
+  width: 100%;
+ 
+}
 footer p {  
   text-align: center;
   color: white;
 }
-footer{
-  background-color: #282020;
+#footerDiv1{
+  width: 100%;
+  display: block;
 }
-/* Add Zoom Animation */
 
+.contactenFooter1{ grid-area:selim;}
+.contactenFooter2{ grid-area:burak;}
+.contactenFooter3{ grid-area:benito;}
+.contactenFooter4{ grid-area:youssef;}
+
+#footerDivContact{
+  width: 100%;
+  display: grid;  
+  grid-template-areas:
+  'selim'
+  'benito'
+  'burak'
+  'youssef';
+  text-align: center;
+}
+
+#footerDivSide{
+  width: 100%;
+}
+.findUs{
+  border-top: 1px gray solid;
+  text-align: center;
+}
+.copy{
+  background-color: black;
+ text-align: center;
+
+}
+.copy p{
+  color: white;
+margin: auto;
+}
+
+#contacteerStad{
+  text-align: center;
+}
+button a {
+  color: white;
+}
+#buttonFooter{
+  text-align: center;
+}
+#footerDivSide button{
+  display: block;
+ margin: auto;
+}
+footer ul{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+footer ul li{
+  display:table;
+    margin:0px auto 0px auto;
+
+}
+/*FOOTER EINDE*/
+
+/* Zoom Animation LOGIN FORM */
 #loginFormActief {
   -webkit-animation: animatezoom 0.8s;
   animation: animatezoom 0.8s
@@ -496,5 +673,38 @@ footer{
   from {transform: scale(0)} 
   to {transform: scale(1)}
 }
+
+}
+
+/*MEDIA QUERY TABLET */
+
+@media (min-width:651px) and (max-width:1071px){
+
+
+/* Li items bewerken van list */
+#lijstAPI{
+  display: none;
+  width: 100%;
+}
+#lijstAPI h5{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#lijstStadsdeel , #lijstBuurt{
+  width: 100%;
+  display: inline-block;
+  
+}
+#lijstStadsdeel li , #lijstBuurt li{
+text-align: center;
+position: relative;
+width: 46%;
+list-style-image: url(../Images/botanical.png);
+margin-left: 25px;
+border-bottom: 1px gray solid;
+
+}
+/* Li items bewerken van list */
+
 
 }

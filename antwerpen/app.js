@@ -54,7 +54,7 @@ app.post('/register', async(req, res) => {
       username: username,
       password: CryptoJS.MD5(password).toString()
     }
-    
+
     await client.db(DATABASE).collection(USERS_COLLECTION).insertOne(user);
     console.log(client);
   }
@@ -62,7 +62,7 @@ app.post('/register', async(req, res) => {
     console.log(exc);
   }
   finally{
-    //res.redirect('/');
+    res.redirect('/');
     await client.close();
   }
 })
