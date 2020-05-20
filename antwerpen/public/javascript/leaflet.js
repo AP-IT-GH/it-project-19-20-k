@@ -96,7 +96,11 @@ myMap.on('click', function(e) {
   });
 });
 });
+function onLocationError(e) {
+  alert(e.message);
+}
 
+myMap.on('locationerror', onLocationError);
 
 //data halen van radio's
 let getStadsdeel = document.getElementById("radio1");
